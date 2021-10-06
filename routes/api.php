@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EasportsPageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+//Route::get('/getEasportsPage/{page}', [EasportsPageController::class, 'index']);
+
+Route::group(["middleware" => "apikey.validate"], function () {
+
+    //Rutas
+    Route::get("/getEasportsPage/{page}", "App\Http\Controllers\EasportsPageController@index");
+  
 });
